@@ -1,11 +1,15 @@
 import { saveProductData } from "./controllers/productController";
 
 const express = require("express");
+const cors = require("cors");
 const { loadProductsData } = require("./controllers/productController");
 const { productRouter } = require("./routes/productRoutes");
 
 const app = express();
-const port = 8000;
+
+app.use(cors());
+
+const port = process.env.PORT || 8000;
 
 loadProductsData();
 

@@ -5,5 +5,3 @@ export interface IProduct {
   image: string;
   averageRating: number;
 }
-
-export const products: IProduct[] = [];
