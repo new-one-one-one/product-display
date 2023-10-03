@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { IProduct } from "../interfaces/product";
+import { StarDisplayer } from "./startDisplayer";
 
 export const ProductCard = (productProps: IProduct) => {
   const { name, price, averageRating, image } = productProps;
@@ -24,6 +25,11 @@ export const ProductCard = (productProps: IProduct) => {
           spacing={{ xs: 1, md: 1 }}
           columns={{ xs: 4, sm: 4, md: 4 }}
         >
+          <Grid item xs={4} sm={4} md={4}>
+            <Typography variant="body1" color="text.secondary">
+              <StarDisplayer power={averageRating / 2} />
+            </Typography>
+          </Grid>
           <Grid item xs={2} sm={2} md={2}>
             <Typography fontWeight={800} variant="body1" color="text.primary">
               Price:
@@ -34,16 +40,11 @@ export const ProductCard = (productProps: IProduct) => {
               $ {price}
             </Typography>
           </Grid>
-          <Grid item xs={2} sm={2} md={2}>
+          {/* <Grid item xs={1} sm={1} md={1}>
             <Typography fontWeight={800} variant="body1" color="text.primary">
               Rating:
             </Typography>
-          </Grid>
-          <Grid item xs={2} sm={2} md={2}>
-            <Typography variant="body1" color="text.secondary">
-              {averageRating / 2}
-            </Typography>
-          </Grid>
+          </Grid> */}
         </Grid>
       </CardContent>
       <CardActions>
