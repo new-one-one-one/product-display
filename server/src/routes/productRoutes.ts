@@ -28,13 +28,3 @@ productRouter.post("/product/purchase", (req: any, res: any) => {
   logger.info("Received product data");
   res.status(201).json({ message: "Product data saved successfully" });
 });
-
-/**
- * 
- 
-
-curl -d '{"average_rating":10,"id":29,"name":"Handmade Rubber Cheese","price":551,"images":"https://i.imgur.com/OARGZQW.jpeg"}' -X POST https://qr328n-3000.csb.app/product/purchase
-
-
-
- */

@@ -3,3 +3,7 @@ server/.env
 server/node_modules
 
 temp.md
+
+client/node_modules
+client/env.local
+client/package-lock.json
