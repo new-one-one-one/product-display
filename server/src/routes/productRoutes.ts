@@ -1,4 +1,6 @@
+import { saveProductData } from "../controllers/productController";
 import { IProduct, products } from "../models/productModel";
+import { logger } from "../utils/logger";
 
 const express = require("express");
 
@@ -18,3 +20,21 @@ productRouter.get("/products/:id", (req: any, res: any) => {
     res.json(product);
   }
 });
+
+productRouter.post("/product/purchase", (req: any, res: any) => {
+  logger.info(JSON.stringify(req));
+  const productData: IProduct = req.body;
+  saveProductData(productData);
+  logger.info("Received product data");
+  res.status(201).json({ message: "Product data saved successfully" });
+});
+
+/**
+ * 
+ 
+
+curl -d '{"average_rating":10,"id":29,"name":"Handmade Rubber Cheese","price":551,"images":"https://i.imgur.com/OARGZQW.jpeg"}' -X POST https://qr328n-3000.csb.app/product/purchase
+
+
+
+ */
