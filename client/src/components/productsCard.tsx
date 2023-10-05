@@ -6,11 +6,14 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { IProduct } from "../interfaces/product";
+import { IProductCardProps } from "../interfaces/product";
 import { StarDisplayer } from "./startDisplayer";
+import { defaultProductProps } from "../utils/constants";
 
-export const ProductCard = (productProps: IProduct) => {
-  const { name, price, averageRating, image } = productProps;
+export const ProductCard = (
+  productProps: IProductCardProps = { ...defaultProductProps },
+) => {
+  const { name, price, averageRating, image } = productProps.productDetails;
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardContent>
@@ -53,6 +56,16 @@ export const ProductCard = (productProps: IProduct) => {
           variant="contained"
           fullWidth
           style={{ textTransform: "none" }}
+          onClick={(event) => {
+            console.log(
+              "oiuytretyuiopoiuytrt",
+              productProps.productActions?.onPurchaseClick,
+            );
+            if (productProps.productActions?.onPurchaseClick !== undefined) {
+              productProps.productActions?.onPurchaseClick();
+            } else {
+            }
+          }}
         >
           Purchase
         </Button>

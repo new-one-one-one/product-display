@@ -1,32 +1,32 @@
 import { useState, useEffect } from "react";
-import { getAllProducts } from "../apiCalls/products/getProducts";
-import { ProductCard } from "../components/productsCard";
-import Grid from "@mui/material/Grid";
+import { useToasts } from "react-toast-notifications";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
+  Grid,
+  Alert,
   Button,
-  FormControl,
   Input,
-  InputLabel,
-  MenuItem,
   Paper,
   Select,
   Skeleton,
+  FormControl,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  InputLabel,
+  MenuItem,
   Typography,
 } from "@mui/material";
-import { ExpandMore, Search } from "@mui/icons-material";
-import { IProduct } from "../interfaces/product";
+import { ExpandMore, MonetizationOn, Search, Star } from "@mui/icons-material";
+import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied";
 
-enum SORT_OPTIONS {
-  ASCENDING = "ascending",
-  DESCENDING = "descending",
-}
+import { getAllProducts } from "../apiCalls/products/getProducts";
+import { ProductCard } from "../components/productsCard";
+import { IProduct, SORT_OPTIONS } from "../interfaces/product";
 
 export const ProductListingPage = () => {
   const [productsData, setProductsData] = useState<Array<IProduct>>([]);
   const [showLoader, setShowLoader] = useState(true);
+  const { addToast } = useToasts();
 
   const [orderedData, setOrderedData] = useState<Array<IProduct>>(
     Array(100).fill(0),
@@ -107,6 +107,7 @@ export const ProductListingPage = () => {
             <FormControl fullWidth style={{ minWidth: 200 }}>
               <InputLabel>Sort by Price</InputLabel>
               <Select
+                startAdornment={<MonetizationOn />}
                 name="priceSort"
                 variant="standard"
                 onChange={handleSorting}
@@ -121,6 +122,7 @@ export const ProductListingPage = () => {
             <FormControl fullWidth style={{ minWidth: 200 }}>
               <InputLabel>Sort by Rating</InputLabel>
               <Select
+                startAdornment={<Star />}
                 name="ratingSort"
                 variant="standard"
                 onChange={handleSorting}
@@ -154,11 +156,19 @@ export const ProductListingPage = () => {
     });
   };
 
+  const handlePurchaseClick = (purchasedProduct: IProduct) => {
+    addToast(`${purchasedProduct.name} successfully purchased`, {
+      appearance: "success",
+      autoDismiss: true,
+      autoDismissTimeout: 2000,
+    });
+  };
+
   return (
     <>
       <Grid
         container
-        spacing={{ xs: 2, md: 2 }}
+        spacing={{ xs: 4, md: 4 }}
         columns={{ xs: 24, sm: 24, md: 24 }}
       >
         <Grid item xs={24} sm={24} md={24}>
@@ -186,10 +196,21 @@ export const ProductListingPage = () => {
                 {showLoader ? (
                   <Skeleton width={200} height={300} />
                 ) : (
-                  <ProductCard {...product} />
+                  <ProductCard
+                    productDetails={product}
+                    productActions={{
+                      onPurchaseClick: () => handlePurchaseClick(product),
+                    }}
+                  />
                 )}
               </Grid>
             ))}
+            {orderedData.length === 0 && (
+              <Alert severity="error" icon={<SentimentDissatisfiedIcon />}>
+                Sorry we don't find any products please try to clear filters and
+                make search again
+              </Alert>
+            )}
           </Grid>
         </Grid>
       </Grid>
