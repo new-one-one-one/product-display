@@ -12,7 +12,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 8000;
+let port = process.env.PORT || 3000;
+const portArgIndex = process.argv.indexOf("--port");
+if (portArgIndex !== -1) {
+  port = parseInt(process.argv[portArgIndex + 1], 10);
+}
 
 loadProductsData();
 
