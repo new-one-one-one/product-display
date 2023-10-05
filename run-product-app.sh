@@ -25,5 +25,5 @@ done
 (cd server && npm install && npm start -- --port "$BACKEND_PORT") &
 
 # Running the frontend server
-(cd client && npm install && REACT_APP_PORT="$FRONTEND_PORT" npm start --legacy-peer-deps)
+(cd client && npm install --legacy-peer-deps && REACT_APP_PORT="$FRONTEND_PORT" npm start )
 

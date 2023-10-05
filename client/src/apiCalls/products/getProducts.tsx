@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "https://qr328n-8000.csb.app/api";
+const apiUrl = "https://qr328n-3000.csb.app/api";
 
 export const getAllProducts = async () => {
   try {
