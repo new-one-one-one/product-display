@@ -19,7 +19,10 @@ import {
 import { ExpandMore, MonetizationOn, Search, Star } from "@mui/icons-material";
 import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied";
 
-import { getAllProducts } from "../apiCalls/products/getProducts";
+import {
+  createProduct,
+  getAllProducts,
+} from "../apiCalls/products/getProducts";
 import { ProductCard } from "../components/productsCard";
 import { IProduct, SORT_OPTIONS } from "../interfaces/product";
 
@@ -157,11 +160,22 @@ export const ProductListingPage = () => {
   };
 
   const handlePurchaseClick = (purchasedProduct: IProduct) => {
-    addToast(`${purchasedProduct.name} successfully purchased`, {
-      appearance: "success",
-      autoDismiss: true,
-      autoDismissTimeout: 2000,
-    });
+    createProduct(purchasedProduct)
+      .then((message) => {
+        addToast(`${purchasedProduct.name} successfully purchased`, {
+          appearance: "success",
+          autoDismiss: true,
+          autoDismissTimeout: 2000,
+        });
+      })
+      .catch((err) => {
+        addToast(`failed to purchase product : ${purchasedProduct.name} `, {
+          appearance: "error",
+          autoDismiss: true,
+          autoDismissTimeout: 3000,
+        });
+        console.log(err);
+      });
   };
 
   return (

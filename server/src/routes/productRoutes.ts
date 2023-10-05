@@ -23,7 +23,8 @@ productRouter.get("/products/:id", (req: any, res: any) => {
 
 productRouter.post("/product/purchase", (req: any, res: any) => {
   logger.info(req);
-  const productData: IProduct = req.body;
+  console.log({ req });
+  const productData: any = req.body;
   logger.info(req.body);
   saveProductData(productData);
   logger.info("Received product data");

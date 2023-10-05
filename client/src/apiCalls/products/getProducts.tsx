@@ -22,8 +22,17 @@ export const getProductById = async (productId: number) => {
 };
 
 export const createProduct = async (productData: any) => {
+  console.log({ productData });
   try {
-    const response = await axios.post(`${apiUrl}/products`, productData);
+    const response = await axios.post(
+      `${apiUrl}/product/purchase`,
+      JSON.stringify(productData),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
     if (response.status === 201) {
       return response.data;
     } else {
