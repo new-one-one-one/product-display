@@ -44,6 +44,12 @@ This project comprises both a backend server and a frontend client for a compreh
    ```
 
 This will initiate the frontend and make it accessible at http://localhost:8080.
+4. In order to manage the backend request from frontend please configure .env.local file present inside client folder
+```
+REACT_APP_BACKEND_URL=http://localhost:3000 
+```
+
+You can change this as per your requirements
 
 ### Alternative Startup Script
 
