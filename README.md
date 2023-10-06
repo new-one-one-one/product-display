@@ -78,3 +78,4 @@ To streamline the project launch process, you can also employ the provided bash 
 ## Deployed Project On Vercel
 
 - [Product Display WebSite](https://product-display-frontend.vercel.app/)
+- [Recording] (https://drive.google.com/file/d/1cnS1eYqjvFtrcY3r9VmzxGqPcN2ZBWX_/view?usp=sharing)
