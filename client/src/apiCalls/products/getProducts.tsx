@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "https://qr328n-3000.csb.app/api";
+const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
 export const getAllProducts = async () => {
   try {
